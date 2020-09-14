@@ -35,7 +35,9 @@ namespace DeliveryConfirmation.Shared.Entities.Entities
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public int? IncidentalInformationId { get; set; }
+        public int IncidentalInformationId { get; set; }
+
+        public virtual IncidentalInformations IncidentalInformation { get; set; }
 
         public string IncidentalInformationText { get; set; }
 

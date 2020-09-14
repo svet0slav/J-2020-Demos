@@ -59,6 +59,9 @@ namespace DeliveryConfirmation.Shared.Entities
                 .Property(t => t.StatusId).IsRequired();
 
             modelBuilder.Entity<Shipments>()
+                .Property(t => t.IncidentalInformationId).IsRequired();
+
+            modelBuilder.Entity<Shipments>()
                 .Property(t => t.TrackingNumber).IsRequired();
 
             modelBuilder.Entity<Shipments>()

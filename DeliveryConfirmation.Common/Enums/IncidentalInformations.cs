@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace DeliveryConfirmation.Common.Enums
 {
-    public enum IncidentalInformationEnum
+    public enum IncidentalInformations
     {
         None = 0,
 
