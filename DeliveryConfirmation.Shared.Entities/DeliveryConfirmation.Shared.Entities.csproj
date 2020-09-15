@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextFactory.cs" />
     <Compile Include="DbConfig.cs" />
     <Compile Include="DeliveryDbInitializer.cs" />
     <Compile Include="Entities\Trucks.cs" />

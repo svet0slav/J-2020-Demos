@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,12 +48,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BO\Contract\IShipmentsBO.cs" />
+    <Compile Include="BO\Contract\ITrucksBO.cs" />
+    <Compile Include="BO\ShipmentsBO.cs" />
+    <Compile Include="BO\TrucksBO.cs" />
+    <Compile Include="Extensions\PaginationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BO\" />
+    <Folder Include="AutofacModules\" />
+    <Folder Include="AutoMapper\" />
     <Folder Include="Validators\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeliveryConfirmation.Common\DeliveryConfirmation.Common.csproj">
+      <Project>{287554cc-789b-4e86-934e-61bf6327cb84}</Project>
+      <Name>DeliveryConfirmation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeliveryConfirmation.Shared.Entities\DeliveryConfirmation.Shared.Entities.csproj">
+      <Project>{d1c8248a-2457-4659-a933-cba63c10d49b}</Project>
+      <Name>DeliveryConfirmation.Shared.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeliveryConfirmation.Shared\DeliveryConfirmation.Shared.csproj">
+      <Project>{55d51e6b-b3ee-4661-8efd-574b1af55b53}</Project>
+      <Name>DeliveryConfirmation.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

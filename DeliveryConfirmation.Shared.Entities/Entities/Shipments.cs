@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DeliveryConfirmation.Shared.Entities.Entities
 {
-    public class Shipments
+    public class Shipment
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ShipmentId { get; set; }
@@ -16,7 +16,7 @@ namespace DeliveryConfirmation.Shared.Entities.Entities
 
         public int TruckId { get; set; }
 
-        public virtual Trucks Truck { get; set; }
+        public virtual Truck Truck { get; set; }
 
         public int StatusId { get; set; }
         public virtual ShipmentStatuses Status { get; set; }
@@ -41,8 +41,10 @@ namespace DeliveryConfirmation.Shared.Entities.Entities
 
         public string IncidentalInformationText { get; set; }
 
-        public Shipments()
+        public Shipment()
         {
+            Status = ShipmentStatuses.Unknown;
+            IncidentalInformation = IncidentalInformations.None;
             CreationDate = DateTime.Now;
             ModifiedDate = DateTime.Now;
         }

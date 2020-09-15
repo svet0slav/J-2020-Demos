@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeliveryConfirmation.Shared.Entities.Entities
 {
-    public partial class Trucks
+    public partial class Truck
     {
-        public Trucks()
+        public Truck()
         {
-            Shipments = new HashSet<Shipments>();
+            Shipments = new HashSet<Shipment>();
             CreationDate = DateTime.Now;
             ModifiedDate = DateTime.Now;
         }
@@ -24,7 +22,7 @@ namespace DeliveryConfirmation.Shared.Entities.Entities
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         
-        public virtual ICollection<Shipments> Shipments { get; set; }
+        public virtual ICollection<Shipment> Shipments { get; set; }
         
     }
 }

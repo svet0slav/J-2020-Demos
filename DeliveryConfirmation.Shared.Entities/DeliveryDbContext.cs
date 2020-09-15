@@ -10,61 +10,61 @@ namespace DeliveryConfirmation.Shared.Entities
         {
         }
 
-        public virtual DbSet<Drivers> Drivers { get; set; }
-        public virtual DbSet<Trucks> Trucks { get; set; }
-        public virtual DbSet<Shipments> Shipments { get; set; }
+        public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<Truck> Trucks { get; set; }
+        public virtual DbSet<Shipment> Shipments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Trucks>()
+            modelBuilder.Entity<Truck>()
                 .HasKey(t => t.TruckId)
                 .Property(t => t.TruckId).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
 
-            modelBuilder.Entity<Trucks>()
+            modelBuilder.Entity<Truck>()
                 .Property(t => t.TruckModel).HasMaxLength(100).IsRequired().IsUnicode();
 
-            modelBuilder.Entity<Trucks>()
+            modelBuilder.Entity<Truck>()
                 .Property(t => t.TruckNumber).HasMaxLength(100).IsRequired().IsUnicode();
 
-            modelBuilder.Entity<Trucks>()
+            modelBuilder.Entity<Truck>()
                         .Property(t => t.CreationDate).IsRequired().HasColumnType("datetime");
 
-            modelBuilder.Entity<Trucks>()
+            modelBuilder.Entity<Truck>()
                         .Property(t => t.ModifiedDate).IsRequired().HasColumnType("datetime");
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .HasKey(t => t.ShipmentId)
                 .Property(t => t.CreationDate).IsRequired().HasColumnType("datetime"); //.HasDefaultValueSql("(getdate())");
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .HasKey(t => t.ShipmentId)
                 .Property(t => t.ModifiedDate).IsRequired().HasColumnType("datetime"); //.HasDefaultValueSql("(getdate())");
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.DestinationAddress).IsRequired().HasMaxLength(255).IsUnicode();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.DestinationName).IsRequired().HasMaxLength(50).IsUnicode();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.OriginAddress).IsRequired().HasMaxLength(255).IsUnicode();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.OriginName).IsRequired().HasMaxLength(50).IsUnicode();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.PackagesNumber).IsRequired();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.StatusId).IsRequired();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.IncidentalInformationId).IsRequired();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .Property(t => t.TrackingNumber).IsRequired();
 
-            modelBuilder.Entity<Shipments>()
+            modelBuilder.Entity<Shipment>()
                 .HasRequired(t => t.Truck)
                     .WithMany(t => t.Shipments)
                     .HasForeignKey(s => s.ShipmentId)

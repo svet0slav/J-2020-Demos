@@ -1,6 +1,6 @@
 ﻿namespace DeliveryConfirmation.Shared.Entities.Entities
 {
-    public class Drivers
+    public class Driver
     {
         public int DriverId { get; set; }
 
