@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -61,26 +64,44 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
+    <Content Include="DeliveryConfirmationService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
+    <Compile Include="DeliveryConfirmationService.svc.cs">
+      <DependentUpon>DeliveryConfirmationService.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeliveryConfirmation.Business\DeliveryConfirmation.Business.csproj">
+      <Project>{83970B0B-21E6-4CAC-A8AA-681AAC58543B}</Project>
+      <Name>DeliveryConfirmation.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeliveryConfirmation.Common\DeliveryConfirmation.Common.csproj">
+      <Project>{287554cc-789b-4e86-934e-61bf6327cb84}</Project>
+      <Name>DeliveryConfirmation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeliveryConfirmation.Shared.Entities\DeliveryConfirmation.Shared.Entities.csproj">
+      <Project>{D1C8248A-2457-4659-A933-CBA63C10D49B}</Project>
+      <Name>DeliveryConfirmation.Shared.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeliveryConfirmation.Shared\DeliveryConfirmation.Shared.csproj">
+      <Project>{55d51e6b-b3ee-4661-8efd-574b1af55b53}</Project>
+      <Name>DeliveryConfirmation.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

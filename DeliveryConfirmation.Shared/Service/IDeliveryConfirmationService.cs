@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DeliveryConfirmation.Shared.Service
 {
@@ -16,17 +17,16 @@ namespace DeliveryConfirmation.Shared.Service
     public interface IDeliveryConfirmationService
     {
         [OperationContract]
-        PagedResponse<TruckDto> GetTrucks(PagingRequest paging);
+        Task<PagedResponse<TruckDto>> GetTrucks(PagingRequest paging);
 
         [OperationContract]
-        PagedResponse<ShipmentDto> GetShipments(int truckId, PagingRequest paging);
+        Task<PagedResponse<ShipmentDto>> GetShipments(int truckId, PagingRequest paging);
 
         [OperationContract]
-        ShipmentDto UpdateShipmentDelivered(int shipmentId);
-
+        Task<ShipmentDto> UpdateShipmentDelivered(int shipmentId);
 
         [OperationContract]
-        ShipmentDto UpdateShipmentHeldOnTruck(int shipmentId);
+        Task<ShipmentDto> UpdateShipmentHeldOnTruck(int shipmentId);
     }
 
 
