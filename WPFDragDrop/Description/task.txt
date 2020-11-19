@@ -1,0 +1,27 @@
+Create a WPF desktop application displaying list of draggable items
+
+1. Create a list of groupepd items
+	- there should be three groups of items (Category A, Category B, Category C)
+	- groups should be displayed as shown in "overview.png"
+	- clicking a Group Button expands the list and displays the items in that group
+	- hovering the mouse over a group or a button changes the button state to the one displayed in the "overview-drag-drop.png"
+	- clicking the group or a button changes the visual state as well
+	- clicking an expanded group contracts the button group and hides the items under the given category
+
+2. Create "droppable areas"
+	- create 5 drop target areas that accept a given type of drop item
+	- Drop target type A accepts items from category A only, drop target B accepts items from category B only.. and so on.
+	- Drop target D doe not accept any type of drop targets
+	- Drop target E accepts all types of drop targets
+	- When an item is dropped over the drop target (if it is accepted) the item name is added to the list besides the area
+
+3. Dragging/Dropping
+	- when the user hovers over the menu item the control state changes according to the design
+	- when the user starts dragging the menu item (e.g "Item B1") the menu item control on the menu side goes back to its idle state and the dragged item follows the mouse possition. Additionally the draggedid item size changes to 50% of its previous width.
+	- dragging an item over a drop area from a different category would result into the drop area turning "red" as displayed in "overview-drag-drop.png"
+	- dragging an item over a drop area from the same category would result intto the drop area turning "green" as displayed in "overview-drag-drop.png"
+
+4. An item can be assigned to only one area
+	- if "Item A1" was assigned to area "E" assigning it again to area "A" should be possible. After assigning the "Item A1" to area "A" the record of it in area "E" should be removed
+
+5. Add a reset button that removes all assigned items from the drop areas

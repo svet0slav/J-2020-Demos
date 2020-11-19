@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFDragDrop", "WPFDragDrop.csproj", "{9EFD41A2-999D-4AB5-9EBE-D89C1B65F709}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EFD41A2-999D-4AB5-9EBE-D89C1B65F709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EFD41A2-999D-4AB5-9EBE-D89C1B65F709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EFD41A2-999D-4AB5-9EBE-D89C1B65F709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EFD41A2-999D-4AB5-9EBE-D89C1B65F709}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A224B01-7979-44AC-9649-C4BEB6DF076F}
+	EndGlobalSection
+EndGlobal
