@@ -8,48 +8,62 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000" Background="Gray">
     <Grid>
-        <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="331,455,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListView Name="lvItems" HorizontalAlignment="Left" Height="568" Margin="34,56,0,0" VerticalAlignment="Top" Width="746"
+        <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="331,455,0,0" VerticalAlignment="Top" Width="100">
+            <StackPanel Orientation="Vertical">
+
+                <ListView Name="lvItems" HorizontalAlignment="Left" Height="568" Margin="34,56,0,0" VerticalAlignment="Top" Width="746"
                   ItemsSource="{Binding ItemsModel}" >
-            <ListView.View>
-                <GridView>
-                    <!--<GridViewColumn x:Name="Category" Header="Category" Width="120"  DisplayMemberBinding="{Binding GroupName}" />-->
-                    <GridViewColumn x:Name="Item" Header="Item" Width="120" DisplayMemberBinding="{Binding ItemName}" />
-                </GridView>
-            </ListView.View>
+                    <ListView.View>
+                        <GridView>
+                            <!--<GridViewColumn x:Name="Category" Header="Category" Width="120"  DisplayMemberBinding="{Binding GroupName}" />-->
+                            <GridViewColumn x:Name="Item" Header="Item" Width="120" DisplayMemberBinding="{Binding ItemName}" />
+                        </GridView>
+                    </ListView.View>
 
-            <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Foreground="White" FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Expander IsExpanded="True">
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal"  Background="Black">
-                                                    <TextBlock Text="{Binding GroupName}" FontWeight="Bold" FontSize="22" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text="{Binding ItemName}" FontSize="22" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
-                                                </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter AllowDrop="True">
-                                            </ItemsPresenter>
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ListView.GroupStyle>
+                    <ListView.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Foreground="White" FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Expander IsExpanded="True">
+                                                    <Expander.Header>
+                                                        <StackPanel Orientation="Horizontal"  Background="Black">
+                                                            <TextBlock Text="{Binding GroupName}" FontWeight="Bold" FontSize="22" VerticalAlignment="Bottom" />
+                                                            <TextBlock Text="{Binding ItemName}" FontSize="22" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                                                        </StackPanel>
+                                                    </Expander.Header>
+                                                    <ItemsPresenter AllowDrop="True">
+                                                    </ItemsPresenter>
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </ListView.GroupStyle>
 
+                </ListView>
 
-        </ListView>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ListView Name="lvButtons" HorizontalAlignment="Left" Height="568" Margin="34,56,0,0" VerticalAlignment="Top" Width="746"
+                  ItemsSource="{Binding ButtonsModel}" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn x:Name="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </DockPanel>
 
     </Grid>
 </Window>

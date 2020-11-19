@@ -23,6 +23,7 @@ namespace WPFDragDrop
     public partial class MainWindow : Window
     {
         internal ObservableCollection<ItemModel> ItemsModel { get; set; }
+        internal ObservableCollection<CategoryButton> ButtonsModel { get; set; }
 
         public MainWindow()
         {
@@ -31,6 +32,8 @@ namespace WPFDragDrop
             var service = new DataService();
             service.Initialize();
             ItemsModel = new ObservableCollection<ItemModel>();
+            ButtonsModel = new ObservableCollection<CategoryButton>();
+
             foreach (var category in service.Categories)
             {
                 foreach (var item in category.Items)
@@ -49,6 +52,11 @@ namespace WPFDragDrop
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvItems.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupName");
             view.GroupDescriptions.Add(groupDescription);
+
+            foreach (var btn in service.CategoryButtons)
+            {
+                ButtonsModel.Add(btn);
+            }
         }
     }
 }

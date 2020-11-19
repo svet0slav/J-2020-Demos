@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace WPFDragDrop
 {
-    class CategoryButton
+    public class CategoryButton
     {
+        public string Name { get; set; }
+        public string Matches { get; set; }
+        public bool MatchesAll { get; set; } = false;
     }
 }

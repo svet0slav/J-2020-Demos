@@ -10,12 +10,12 @@ namespace WPFDragDrop
     {
         public List<CategoryData> Categories;
 
-        public List<string> Buttons;
+        public List<CategoryButton> CategoryButtons;
 
         public DataService()
         {
             Categories = new List<CategoryData>();
-            Buttons = new List<string>();
+            CategoryButtons = new List<CategoryButton>();
         }
 
         public void Initialize()
@@ -50,11 +50,11 @@ namespace WPFDragDrop
             Categories[2].Items.Add(new ItemData() { Id = 34, Name = "Item C4" });
             Categories[2].Items.Add(new ItemData() { Id = 34, Name = "Item C5" });
 
-            Buttons.Add("A");
-            Buttons.Add("B");
-            Buttons.Add("C");
-            Buttons.Add("D");
-            Buttons.Add("E");
+            CategoryButtons.Add(new CategoryButton() { Name = "A", Matches = "Category A" });
+            CategoryButtons.Add(new CategoryButton() { Name = "B", Matches = "Category B" });
+            CategoryButtons.Add(new CategoryButton() { Name = "C", Matches = "Category C" });
+            CategoryButtons.Add(new CategoryButton() { Name = "D", Matches = string.Empty });
+            CategoryButtons.Add(new CategoryButton() { Name = "E", Matches = string.Empty, MatchesAll = true });
         }
     }
 }
