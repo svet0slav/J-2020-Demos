@@ -20,7 +20,9 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Width="200">
             <ListView Name="lvItems" Margin="10,10,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                         Width="200" Height="auto" ItemsSource="{Binding ItemsModel}"
-                        Background="Black" Foreground="White">
+                        Background="Black" Foreground="White"
+                      AllowDrop="True"
+                      DragDrop.DragEnter="lvItems_DragEnter">
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -113,7 +115,10 @@
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
             <ListView Name="lvButtons" HorizontalAlignment="Stretch" Height="auto" Margin="10,10,10,10" 
                           VerticalAlignment="Stretch" Width="auto" FontSize="48" Background="Black" Foreground="White"
-                  ItemsSource="{Binding ButtonsModel}">
+                  ItemsSource="{Binding ButtonsModel}" AllowDrop="True"
+                      DragDrop.DragOver="lvButtons_DragOver"
+                      DragDrop.Drop="lvButtons_Drop"
+                      >
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
                             <Setter Property="Visibility" Value="Collapsed" />

@@ -79,5 +79,28 @@ namespace WPFDragDrop
             lvButtons.ItemsSource = ButtonsModel;
         }
 
+        private void lvItems_DragEnter(object sender, DragEventArgs e)
+        {
+            // Item from left is dragged
+            //if (e.Data.GetDataPresent("GroupName"))
+            if (e.Data.GetDataPresent("ItemModel") && sender != e.Source)
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+        private void lvButtons_DragOver(object sender, DragEventArgs e)
+        {
+            var a = 10;
+        }
+
+        private void lvButtons_Drop(object sender, DragEventArgs e)
+        {
+            var b = 10;
+        }
     }
 }
