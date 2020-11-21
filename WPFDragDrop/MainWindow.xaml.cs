@@ -264,5 +264,19 @@ namespace WPFDragDrop
                 this.BottomHoverText.Text = "";
             }
         }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(var item in ButtonsModel)
+            {
+                if (item.DroppedItems != null)
+                {
+                    while (item.DroppedItems.Count() > 0)
+                    {
+                        item.DroppedItems.Remove(0);
+                    }
+                }
+            }
+        }
     }
 }
