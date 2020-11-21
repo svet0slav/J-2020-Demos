@@ -77,11 +77,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CategoryButton.cs" />
-    <Compile Include="CategoryData.cs" />
-    <Compile Include="DataService.cs" />
-    <Compile Include="ItemData.cs" />
-    <Compile Include="ItemModel.cs" />
+    <Compile Include="Data\CategoryDto.cs" />
+    <Compile Include="Data\RightCategoryDto.cs" />
+    <Compile Include="Model\CategoryModel.cs" />
+    <Compile Include="Data\DataService.cs" />
+    <Compile Include="Data\ItemDto.cs" />
+    <Compile Include="Model\ItemModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFDragDrop
+namespace WPFDragDrop.Data
 {
-    public class CategoryButton
+    public class RightCategoryDto
     {
         public string Name { get; set; }
         public string Matches { get; set; }

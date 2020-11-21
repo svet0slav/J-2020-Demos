@@ -1,6 +1,6 @@
-﻿namespace WPFDragDrop
+﻿namespace WPFDragDrop.Data
 {
-    public class ItemData
+    public class ItemDto
     {
         public string Name { get; set; }
         public int Id { get; set; }

@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFDragDrop.Data;
+using WPFDragDrop.Model;
 
 namespace WPFDragDrop
 {
@@ -23,16 +25,22 @@ namespace WPFDragDrop
     public partial class MainWindow : Window
     {
         internal ObservableCollection<ItemModel> ItemsModel { get; set; }
-        internal ObservableCollection<CategoryButton> ButtonsModel { get; set; }
+        internal ObservableCollection<CategoryModel> ButtonsModel { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
 
+            InitializeData();
+
+            BindData();
+        }
+
+        private void InitializeData()
+        {
             var service = new DataService();
             service.Initialize();
             ItemsModel = new ObservableCollection<ItemModel>();
-            ButtonsModel = new ObservableCollection<CategoryButton>();
 
             foreach (var category in service.Categories)
             {
@@ -48,15 +56,28 @@ namespace WPFDragDrop
                 }
             }
 
+            ButtonsModel = new ObservableCollection<CategoryModel>();
+
+            foreach (var btn in service.RightCategoryButtons)
+            {
+                ButtonsModel.Add(new CategoryModel()
+                {
+                    Name = btn.Name,
+                    Matches = btn.Matches,
+                    MatchesAll = btn.MatchesAll
+                });
+            }
+        }
+
+        private void BindData()
+        {
             lvItems.ItemsSource = ItemsModel;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvItems.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupName");
             view.GroupDescriptions.Add(groupDescription);
 
-            foreach (var btn in service.CategoryButtons)
-            {
-                ButtonsModel.Add(btn);
-            }
+            lvButtons.ItemsSource = ButtonsModel;
         }
+
     }
 }
