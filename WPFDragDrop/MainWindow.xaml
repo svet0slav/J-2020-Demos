@@ -22,7 +22,8 @@
                         Width="200" Height="auto" ItemsSource="{Binding ItemsModel}"
                         Background="Black" Foreground="White"
                       AllowDrop="True"
-                      DragDrop.DragEnter="lvItems_DragEnter">
+                      DragDrop.DragEnter="lvItems_DragEnter"
+                      PreviewMouseLeftButtonDown="lvItems_PreviewMouseLeftButtonDown">
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -62,18 +63,11 @@
                             <GridViewColumn.CellTemplate>
                                 <ItemContainerTemplate>
                                     <TextBlock Text="{Binding ItemName}" Background="Black" Foreground="DarkGray" TextAlignment="Left" 
-                                                Margin="0,0,0,0" Width="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                                Margin="0,0,0,0" Width="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                               DragDrop.DragEnter="lvItems_ItemTextBlock_DragEnter"/>
                                 </ItemContainerTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <!--<GridViewColumn x:Name="Name" Width="10">
-                            <GridViewColumn.CellTemplate>
-                                <ItemContainerTemplate>
-                                    <TextBlock Text="" Background="Black" Foreground="White" TextAlignment="Center" 
-                                                Margin="0,0,0,0" Width="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                                </ItemContainerTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>-->
                     </GridView>
                 </ListView.View>
 
@@ -94,7 +88,6 @@
                                                     <StackPanel Orientation="Horizontal" Background="Black">
                                                         <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22" VerticalAlignment="Bottom"
                                                                     Background="Black" Foreground="White"/>
-                                                        <!--<TextBlock Text="{Binding ItemName}" FontSize="22" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom"/>-->
                                                     </StackPanel>
                                                 </Expander.Header>
 
@@ -114,10 +107,9 @@
 
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
             <ListView Name="lvButtons" HorizontalAlignment="Stretch" Height="auto" Margin="10,10,10,10" 
-                          VerticalAlignment="Stretch" Width="auto" FontSize="48" Background="Black" Foreground="White"
+                          VerticalAlignment="Stretch" Width="auto" Background="Black" Foreground="White"
                   ItemsSource="{Binding ButtonsModel}" AllowDrop="True"
                       DragDrop.DragOver="lvButtons_DragOver"
-                      DragDrop.Drop="lvButtons_Drop"
                       >
                     <ListView.Resources>
                         <Style TargetType="GridViewColumnHeader">
@@ -140,41 +132,33 @@
                             </Style.Triggers>
                         </Style>
                     </ListView.ItemContainerStyle>
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="False">
-                            <GridViewColumn x:Name="Name1" Width="100px">
-                                <GridViewColumn.CellTemplate>
-                                    <ItemContainerTemplate>
-                                        <TextBlock Text="{Binding Name}" Background="Black" Foreground="White" TextAlignment="Center" Margin="0,0,0,0" Width="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                                    </ItemContainerTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn x:Name="MatchesName" Width="300px">
-                                <GridViewColumn.CellTemplate>
-                                    <ItemContainerTemplate>
-                                        <StackPanel Orientation="Horizontal" Background="Gray" Width="300px">
-                                            <TextBlock Text="{Binding MatchesName}" Background="Gray" Foreground="DarkGray"/>
-                                        </StackPanel>
-                                    </ItemContainerTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Width="100px" x:Name="Last">
-                                <GridViewColumn.CellTemplate>
-                                    <ItemContainerTemplate>
-                                        <StackPanel Orientation="Horizontal" Background="Gray" Width="200px" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                            <TextBlock Background="Gray" Margin="0,0,0,0"></TextBlock>
-                                        </StackPanel>
-                                    </ItemContainerTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                    <!--<ListView.ItemTemplate>
-                        <ItemContainerTemplate>
-                            <TextBlock x:Name="Name" Text="{Binding Name}"></TextBlock>
-                        </ItemContainerTemplate>
-                    </ListView.ItemTemplate>-->
-                </ListView>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn x:Name="Name1" Width="100px">
+                            <GridViewColumn.CellTemplate>
+                                <ItemContainerTemplate>
+                                    <TextBlock Text="{Binding Name}" Background="Black" Foreground="White" FontSize="48"
+                                               TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                                Margin="0,0,0,0" Width="100" Height="60"
+                                                DragDrop.Drop="lvButtons_TextBlock_Drop"
+                                                DragDrop.DragOver="lvButtons_TextBlock_DragOver"/>
+                                </ItemContainerTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="MatchesName" Width="300px">
+                            <GridViewColumn.CellTemplate>
+                                <ItemContainerTemplate>
+                                    <StackPanel Orientation="Horizontal" Background="Gray" Width="300px">
+                                        <TextBlock Text="{Binding DroppedItems}" Background="Gray" Foreground="DarkGray"
+                                                        Height="60"/>
+                                    </StackPanel>
+                                </ItemContainerTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
             
             <!-- Bottom Left -->

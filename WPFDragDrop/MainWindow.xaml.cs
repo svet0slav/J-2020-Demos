@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WPFDragDrop.Data;
 using WPFDragDrop.Model;
 
@@ -26,6 +18,7 @@ namespace WPFDragDrop
     {
         internal ObservableCollection<ItemModel> ItemsModel { get; set; }
         internal ObservableCollection<CategoryModel> ButtonsModel { get; set; }
+        internal ListView dragSource { get; set; } = null;
 
         public MainWindow()
         {
@@ -38,6 +31,7 @@ namespace WPFDragDrop
 
         private void InitializeData()
         {
+            dragSource = null;
             var service = new DataService();
             service.Initialize();
             ItemsModel = new ObservableCollection<ItemModel>();
@@ -95,12 +89,126 @@ namespace WPFDragDrop
 
         private void lvButtons_DragOver(object sender, DragEventArgs e)
         {
-            var a = 10;
+            if (e.Data.GetDataPresent("WPFDragDrop.Model.ItemModel"))
+            {
+                var data = e.Data.GetData("WPFDragDrop.Model.ItemModel");
+                var itemData = (ItemModel)data;
+                foreach(var model in ButtonsModel)
+                {
+                    if (model.Dropped != null && model.Dropped.Any(m => m.ItemName == itemData.ItemName))
+                    {
+                        e.Effects = DragDropEffects.None;
+                        return;
+                    }
+                }
+                e.Effects = DragDropEffects.Copy;
+            }
         }
 
-        private void lvButtons_Drop(object sender, DragEventArgs e)
+        private void lvButtons_TextBlock_DragOver(object sender, DragEventArgs e)
         {
-            var b = 10;
+            if (e.Data.GetDataPresent("WPFDragDrop.Model.ItemModel"))
+            {
+                var data = e.Data.GetData("WPFDragDrop.Model.ItemModel");
+                var itemData = (ItemModel)data;
+                CategoryModel category = (CategoryModel)(((TextBlock)sender).DataContext);
+
+                //If same category and have not been added already, show Copy, otherwise show "block".
+                if (category.MatchesAll || category.Matches.Contains(itemData.GroupName))
+                {
+                    foreach (var model in ButtonsModel)
+                    {
+                        if (model.Dropped != null && model.Dropped.Any(m => m.ItemName == itemData.ItemName))
+                        {
+                            e.Effects = DragDropEffects.None;
+                            return;
+                        }
+                    }
+                    e.Effects = DragDropEffects.Copy;
+                }
+                else
+                {
+                    e.Effects = DragDropEffects.None;
+                }
+            }
         }
+
+        private void lvButtons_TextBlock_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("WPFDragDrop.Model.ItemModel"))
+            {
+                var data = e.Data.GetData("WPFDragDrop.Model.ItemModel");
+                var itemData = (ItemModel)data;
+                CategoryModel category = (CategoryModel)(((TextBlock)sender).DataContext);
+                //If same category and have not been added already, show Copy, otherwise show "block".
+                if (category.MatchesAll || category.Matches.Contains(itemData.GroupName))
+                {
+                    category.Drop(itemData);
+                    e.Handled = true;
+                }
+                else
+                {
+                    e.Effects = DragDropEffects.None;
+                    e.Handled = true;
+                }
+
+            }
+        }
+
+        private void lvItems_ItemTextBlock_DragEnter(object sender, DragEventArgs e)
+        {
+            // Item from left is dragged and can not drop here
+                e.Effects = DragDropEffects.None;
+        }
+
+        #region GetDataFromListView(ListBox,Point) on Mouse LeftButton Down
+
+        // Code from https://www.c-sharpcorner.com/uploadfile/dpatra/drag-and-drop-item-in-listbox-in-wpf/
+        private void lvItems_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ListView control = (ListView)sender;
+            dragSource = control;
+            object data = GetDataFromListView(dragSource, e.GetPosition(control));
+
+            if (data != null)
+            {
+                DragDrop.DoDragDrop(control, data, DragDropEffects.Copy);
+                //BottomHover.Text = ((ItemModel)data)
+            }
+        }
+
+        
+        private object GetDataFromListView(ListView source, Point point)
+        {
+            UIElement element = source.InputHitTest(point) as UIElement;
+            if (element != null)
+            {
+                object data = DependencyProperty.UnsetValue;
+                while (data == DependencyProperty.UnsetValue)
+                {
+                    data = source.ItemContainerGenerator.ItemFromContainer(element);
+
+                    if (data == DependencyProperty.UnsetValue)
+                    {
+                        element = VisualTreeHelper.GetParent(element) as UIElement;
+                    }
+
+                    if (element == source)
+                    {
+                        return null;
+                    }
+                }
+
+                if (data != DependencyProperty.UnsetValue)
+                {
+                    return data;
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
+
     }
 }
