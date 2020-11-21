@@ -7,65 +7,231 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="WPFDragDrop.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000" Background="Gray">
+
     <Grid>
-        <DockPanel HorizontalAlignment="Stretch" LastChildFill="True" Margin="20,20,20,20" VerticalAlignment="Stretch"
-                   Background="Gray">
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Left" Width="200">
-                <ListView Name="lvItems" Margin="10,10,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                          Width="200" Height="auto" ItemsSource="{Binding ItemsModel}"
-                          Background="Black" Foreground="White">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn x:Name="Item" Header=""
-                                    DisplayMemberBinding="{Binding ItemName}" />
-                        </GridView>
-                    </ListView.View>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Width="200">
+            <ListView Name="lvItems" Margin="10,10,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                        Width="200" Height="auto" ItemsSource="{Binding ItemsModel}"
+                        Background="Black" Foreground="White">
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </Style>
+                    <Style TargetType="GridViewRowPresenter">
+                        <Setter Property="Margin" Value="0,0,0,0"></Setter>
+                        <Setter Property="Canvas.Background" Value="Black"></Setter>
+                    </Style>
+                    <Style TargetType="ScrollViewer">
+                        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Background" Value="Black"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn x:Name="Space" Header="" Width="20">
+                            <GridViewColumn.CellTemplate>
+                                <ItemContainerTemplate>
+                                    <TextBlock Text="" Background="Black" Foreground="White" TextAlignment="Center" 
+                                                Margin="0,0,0,0" Width="20" />
+                                </ItemContainerTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Name="Item" Header="" Width="140">
+                            <GridViewColumn.CellTemplate>
+                                <ItemContainerTemplate>
+                                    <TextBlock Text="{Binding ItemName}" Background="Black" Foreground="DarkGray" TextAlignment="Left" 
+                                                Margin="0,0,0,0" Width="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                </ItemContainerTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!--<GridViewColumn x:Name="Name" Width="10">
+                            <GridViewColumn.CellTemplate>
+                                <ItemContainerTemplate>
+                                    <TextBlock Text="" Background="Black" Foreground="White" TextAlignment="Center" 
+                                                Margin="0,0,0,0" Width="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                </ItemContainerTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
+                    </GridView>
+                </ListView.View>
 
-                    <ListView.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <TextBlock Foreground="White" Background="Black" FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-                            <GroupStyle.ContainerStyle>
-                                <Style TargetType="{x:Type GroupItem}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Expander IsExpanded="True">
-                                                    <Expander.Header>
-                                                        <StackPanel Orientation="Horizontal" Background="Black">
-                                                            <TextBlock Text="{Binding GroupName}" FontWeight="Bold" FontSize="22" VerticalAlignment="Bottom" />
-                                                            <!--<TextBlock Text="{Binding ItemName}" FontSize="22" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom"/>-->
-                                                        </StackPanel>
-                                                    </Expander.Header>
-                                                    <ItemsPresenter AllowDrop="True">
-                                                    </ItemsPresenter>
-                                                </Expander>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </GroupStyle.ContainerStyle>
-                        </GroupStyle>
-                    </ListView.GroupStyle>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Foreground="White" Background="Black" FontWeight="Bold" FontSize="14" Text="{Binding GroupName}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal" Background="Black">
+                                                        <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22" VerticalAlignment="Bottom"
+                                                                    Background="Black" Foreground="White"/>
+                                                        <!--<TextBlock Text="{Binding ItemName}" FontSize="22" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom"/>-->
+                                                    </StackPanel>
+                                                </Expander.Header>
 
-                </ListView>
+                                                <ItemsPresenter AllowDrop="True">
+                                                </ItemsPresenter>
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
 
-            </StackPanel>
+            </ListView>
+        </StackPanel>
 
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
-                <ListView Name="lvButtons" HorizontalAlignment="Left" Height="auto" Margin="10,10,10,10" VerticalAlignment="Top" Width="auto"
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <ListView Name="lvButtons" HorizontalAlignment="Stretch" Height="auto" Margin="10,10,10,10" 
+                          VerticalAlignment="Stretch" Width="auto" FontSize="48" Background="Black" Foreground="White"
                   ItemsSource="{Binding ButtonsModel}">
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                        <Style TargetType="GridViewRowPresenter">
+                            <Setter Property="Margin" Value="0,0,0,0"></Setter>
+                        </Style>
+                        <Style TargetType="ScrollViewer">
+                            <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                     <ListView.View>
-                        <GridView>
-                            <GridViewColumn x:Name="Name" Width="120" DisplayMemberBinding="{Binding Name}" />
+                        <GridView AllowsColumnReorder="False">
+                            <GridViewColumn x:Name="Name1" Width="100px">
+                                <GridViewColumn.CellTemplate>
+                                    <ItemContainerTemplate>
+                                        <TextBlock Text="{Binding Name}" Background="Black" Foreground="White" TextAlignment="Center" Margin="0,0,0,0" Width="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                    </ItemContainerTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn x:Name="MatchesName" Width="300px">
+                                <GridViewColumn.CellTemplate>
+                                    <ItemContainerTemplate>
+                                        <StackPanel Orientation="Horizontal" Background="Gray" Width="300px">
+                                            <TextBlock Text="{Binding MatchesName}" Background="Gray" Foreground="DarkGray"/>
+                                        </StackPanel>
+                                    </ItemContainerTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="100px" x:Name="Last">
+                                <GridViewColumn.CellTemplate>
+                                    <ItemContainerTemplate>
+                                        <StackPanel Orientation="Horizontal" Background="Gray" Width="200px" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <TextBlock Background="Gray" Margin="0,0,0,0"></TextBlock>
+                                        </StackPanel>
+                                    </ItemContainerTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
+                    <!--<ListView.ItemTemplate>
+                        <ItemContainerTemplate>
+                            <TextBlock x:Name="Name" Text="{Binding Name}"></TextBlock>
+                        </ItemContainerTemplate>
+                    </ListView.ItemTemplate>-->
                 </ListView>
-            </StackPanel>
-        </DockPanel>
+        </StackPanel>
+            
+            <!-- Bottom Left -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" DockPanel.Dock="Bottom" Width="200"
+                    Background="Transparent" Height="100">
+            <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="200" Height="100">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                    <TextBlock Text="Hover / Click / Drag" x:Name="BottomHover" Background="Transparent" Foreground="White"
+                           TextAlignment="Center" HorizontalAlignment="Stretch"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Experiment" x:Name="BottomHoverText" Background="DarkViolet" Foreground="White"
+                           />
+                </StackPanel>
+            </Grid>
+            <!--</StackPanel>-->
+            
+        </StackPanel>
+        <!-- Bottom Right -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Width="200" Background="Transparent" Height="100">
+            <!--<StackPanel.Style>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Block.BorderThickness" Value="5"></Setter>
+                    <Setter Property="Block.BorderBrush" Value="Red"></Setter>
+                </Style>
+            </StackPanel.Style>-->
+            <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="200" Height="100">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                    <TextBlock Text="Hover Over Target" x:Name="BottomRight" Background="Black" Foreground="White"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                    <TextBlock Text="Experiment" x:Name="BottomRightText" Background="DarkViolet" Foreground="White"
+                           />
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="0">
+                    <TextBlock Text="Hover Over Target" x:Name="BottomRight2" Background="Red" Foreground="White"
+                               FontSize="20"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="1">
+                    <TextBlock Text="Experiment" x:Name="BottomRightText2" Background="DarkViolet" Foreground="White"
+                           />
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="0">
+                    <TextBlock Text="Hover Over Target" x:Name="BottomRight3" Background="LightGreen" Foreground="White"
+                               FontSize="20"></TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1">
+                    <TextBlock Text="Experiment" x:Name="BottomRightText4" Background="DarkViolet" Foreground="White"
+                           />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
 
     </Grid>
 </Window>
