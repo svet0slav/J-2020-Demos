@@ -113,6 +113,7 @@ namespace WPFDragDrop
                             e.Effects = DragDropEffects.None;
                             this.BottomRight2.Text = model.Name;
                             this.BottomRightText2.Text = itemData.ItemName;
+                            this.BottomRight2.Foreground = Brushes.Red;
                             return;
                         }
                         else
@@ -121,11 +122,16 @@ namespace WPFDragDrop
                             {
                                 this.BottomRight3.Text = model.Name;
                                 this.BottomRightText3.Text = itemData.ItemName;
+                                this.BottomRightText3.Foreground = Brushes.Green;
                             }
                             else
                             {
+                                this.BottomRight2.Text = "";
+                                this.BottomRightText2.Text = "";
+                                this.BottomRightText2.Foreground = Brushes.Gray;
                                 this.BottomRight3.Text = "";
                                 this.BottomRightText3.Text = "";
+                                this.BottomRightText3.Foreground = Brushes.Gray;
                             }
                         }
                     }
