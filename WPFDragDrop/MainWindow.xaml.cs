@@ -93,15 +93,34 @@ namespace WPFDragDrop
             {
                 var data = e.Data.GetData("WPFDragDrop.Model.ItemModel");
                 var itemData = (ItemModel)data;
-                foreach(var model in ButtonsModel)
+                this.BottomRightText.Text = itemData.ItemName;
+
+                foreach (var model in ButtonsModel)
                 {
+                    //Allow unique drops
                     if (model.Dropped != null && model.Dropped.Any(m => m.ItemName == itemData.ItemName))
                     {
                         e.Effects = DragDropEffects.None;
+                        this.BottomRight2.Text = model.Name;
+                        this.BottomRightText2.Text = itemData.ItemName;
                         return;
+                    }
+                    else
+                    {
+                        if (model.Matches.Contains(itemData.GroupName))
+                        {
+                            this.BottomRight3.Text = model.Name;
+                            this.BottomRightText3.Text = itemData.ItemName;
+                        }
+                        else
+                        {
+                            this.BottomRight3.Text = "";
+                            this.BottomRightText3.Text = "";
+                        }
                     }
                 }
                 e.Effects = DragDropEffects.Copy;
+                
             }
         }
 
@@ -111,6 +130,8 @@ namespace WPFDragDrop
             {
                 var data = e.Data.GetData("WPFDragDrop.Model.ItemModel");
                 var itemData = (ItemModel)data;
+                this.BottomRightText.Text = itemData.ItemName;
+
                 CategoryModel category = (CategoryModel)(((TextBlock)sender).DataContext);
 
                 //If same category and have not been added already, show Copy, otherwise show "block".
@@ -172,8 +193,8 @@ namespace WPFDragDrop
 
             if (data != null)
             {
+                this.BottomHoverText.Text = ((ItemModel)data).ItemName;
                 DragDrop.DoDragDrop(control, data, DragDropEffects.Copy);
-                //BottomHover.Text = ((ItemModel)data)
             }
         }
 

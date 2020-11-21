@@ -150,7 +150,9 @@
                                 <ItemContainerTemplate>
                                     <StackPanel Orientation="Horizontal" Background="Gray" Width="300px">
                                         <TextBlock Text="{Binding DroppedItems}" Background="Gray" Foreground="DarkGray"
-                                                        Height="60"/>
+                                                        Height="60"
+                                                   DragDrop.Drop="lvButtons_TextBlock_Drop"
+                                                DragDrop.DragOver="lvButtons_TextBlock_DragOver"/>
                                     </StackPanel>
                                 </ItemContainerTemplate>
                             </GridViewColumn.CellTemplate>
