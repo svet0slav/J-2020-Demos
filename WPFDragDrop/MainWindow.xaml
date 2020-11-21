@@ -174,60 +174,74 @@
             
             <!-- Bottom Left -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" DockPanel.Dock="Bottom" Width="200"
-                    Background="Transparent" Height="100">
+                    Background="Transparent" VerticalAlignment="Top" Margin="0,20,0,0">
             <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="200" Height="100">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Width="200" HorizontalAlignment="Center">
                     <TextBlock Text="Hover / Click / Drag" x:Name="BottomHover" Background="Transparent" Foreground="White"
-                           TextAlignment="Center" HorizontalAlignment="Stretch"/>
+                           TextAlignment="Center" HorizontalAlignment="Center"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Experiment" x:Name="BottomHoverText" Background="DarkViolet" Foreground="White"
-                           />
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Width="200"
+                            Background="DarkViolet" Margin="0,0,10,0">
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Experiment" x:Name="BottomHoverText" 
+                               Background="DarkViolet" Foreground="White"/>
                 </StackPanel>
             </Grid>
-            <!--</StackPanel>-->
-            
         </StackPanel>
+        
         <!-- Bottom Right -->
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Width="200" Background="Transparent" Height="100">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Width="auto" Height="auto"
+                    Background="Transparent" Margin="0,20,0,0">
             <!--<StackPanel.Style>
                 <Style TargetType="StackPanel">
                     <Setter Property="Block.BorderThickness" Value="5"></Setter>
                     <Setter Property="Block.BorderBrush" Value="Red"></Setter>
                 </Style>
             </StackPanel.Style>-->
-            <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="200" Height="100">
+            <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="200" Height="500">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                    <TextBlock Text="Hover Over Target" x:Name="BottomRight" Background="Black" Foreground="White"></TextBlock>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                            Margin="0,0,0,0" Background="Transparent" Width="200" HorizontalAlignment="Center">
+                    <TextBlock Text="Hover Over Target" x:Name="BottomRight" Foreground="White" TextAlignment="Center"
+                               Width="200"></TextBlock>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                            Margin="0,0,0,0" Background="DarkViolet" Width="200" HorizontalAlignment="Center">
                     <TextBlock Text="Experiment" x:Name="BottomRightText" Background="DarkViolet" Foreground="White"
                            />
                 </StackPanel>
 
-                <StackPanel Grid.Row="2" Grid.Column="0">
-                    <TextBlock Text="Hover Over Target" x:Name="BottomRight2" Background="Red" Foreground="White"
-                               FontSize="20"/>
+                <StackPanel Grid.Row="2" Grid.Column="0" Height="30"
+                            Margin="0,0,0,0" Background="Transparent" Width="50" HorizontalAlignment="Center">
+                    <TextBlock Text="A" x:Name="BottomRight2" Background="Red" Foreground="White"
+                               FontSize="22" TextAlignment="Center"/>
                 </StackPanel>
-                <StackPanel Grid.Row="2" Grid.Column="1">
-                    <TextBlock Text="Experiment" x:Name="BottomRightText2" Background="DarkViolet" Foreground="White"
+                <StackPanel Grid.Row="2" Grid.Column="1" Height="30" Grid.ColumnSpan="2"
+                            Background="Black" Width="150" HorizontalAlignment="Left">
+                    <TextBlock Text="Item A1" x:Name="BottomRightText2" Background="DarkViolet" Foreground="White"
                            />
                 </StackPanel>
 
-                <StackPanel Grid.Row="3" Grid.Column="0">
-                    <TextBlock Text="Hover Over Target" x:Name="BottomRight3" Background="LightGreen" Foreground="White"
+                <StackPanel Grid.Row="3" Grid.Column="0" Height="30">
+                    <TextBlock Text="B" x:Name="BottomRight3" Background="SeaGreen" Foreground="White"
                                FontSize="20"></TextBlock>
                 </StackPanel>
-                <StackPanel Grid.Row="3" Grid.Column="1">
-                    <TextBlock Text="Experiment" x:Name="BottomRightText4" Background="DarkViolet" Foreground="White"
+                <StackPanel Grid.Row="3" Grid.Column="1" Height="30" Grid.ColumnSpan="2"
+                            Background="Black" Width="150" HorizontalAlignment="Left">
+                    <TextBlock Text="Item B2" x:Name="BottomRightText3" Background="DarkViolet" Foreground="White"
                            />
                 </StackPanel>
             </Grid>
