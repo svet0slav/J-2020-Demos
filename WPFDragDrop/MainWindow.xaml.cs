@@ -89,39 +89,7 @@ namespace WPFDragDrop
 
         private void lvButtons_DragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent("WPFDragDrop.Model.ItemModel"))
-            {
-                var data = e.Data.GetData("WPFDragDrop.Model.ItemModel");
-                var itemData = (ItemModel)data;
-                this.BottomRightText.Text = itemData.ItemName;
-
-                foreach (var model in ButtonsModel)
-                {
-                    //Allow unique drops
-                    if (model.Dropped != null && model.Dropped.Any(m => m.ItemName == itemData.ItemName))
-                    {
-                        e.Effects = DragDropEffects.None;
-                        this.BottomRight2.Text = model.Name;
-                        this.BottomRightText2.Text = itemData.ItemName;
-                        return;
-                    }
-                    else
-                    {
-                        if (model.Matches.Contains(itemData.GroupName))
-                        {
-                            this.BottomRight3.Text = model.Name;
-                            this.BottomRightText3.Text = itemData.ItemName;
-                        }
-                        else
-                        {
-                            this.BottomRight3.Text = "";
-                            this.BottomRightText3.Text = "";
-                        }
-                    }
-                }
-                e.Effects = DragDropEffects.Copy;
-                
-            }
+            //
         }
 
         private void lvButtons_TextBlock_DragOver(object sender, DragEventArgs e)
@@ -139,10 +107,26 @@ namespace WPFDragDrop
                 {
                     foreach (var model in ButtonsModel)
                     {
+                        //Allow unique drops
                         if (model.Dropped != null && model.Dropped.Any(m => m.ItemName == itemData.ItemName))
                         {
                             e.Effects = DragDropEffects.None;
+                            this.BottomRight2.Text = model.Name;
+                            this.BottomRightText2.Text = itemData.ItemName;
                             return;
+                        }
+                        else
+                        {
+                            if (model.Matches.Contains(itemData.GroupName))
+                            {
+                                this.BottomRight3.Text = model.Name;
+                                this.BottomRightText3.Text = itemData.ItemName;
+                            }
+                            else
+                            {
+                                this.BottomRight3.Text = "";
+                                this.BottomRightText3.Text = "";
+                            }
                         }
                     }
                     e.Effects = DragDropEffects.Copy;
@@ -166,11 +150,14 @@ namespace WPFDragDrop
                 {
                     category.Drop(itemData);
                     e.Handled = true;
+                    this.BottomHoverText.Text = "";
+                    dragSource = null;
                 }
                 else
                 {
                     e.Effects = DragDropEffects.None;
                     e.Handled = true;
+                    dragSource = null;
                 }
 
             }
@@ -231,5 +218,45 @@ namespace WPFDragDrop
 
         #endregion
 
+        private void lvItems_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ListView control = (ListView)sender;
+            object data = GetDataFromListView(control, e.GetPosition(control));
+            
+            if (data != null)
+            {
+                this.BottomHoverText.Text = ((ItemModel)data).ItemName;
+            }
+        }
+
+        private void lvItems_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ListView control = (ListView)sender;
+            object data = GetDataFromListView(control, e.GetPosition(control));
+
+            // update when found and not dragging
+            if (data != null && dragSource == null)
+            {
+                this.BottomHoverText.Text = "";
+            }
+        }
+
+        private void lvItems_ItemTextBlock_MouseEnter(object sender, MouseEventArgs e)
+        {
+            TextBlock control = (TextBlock)sender;
+            if (control != null && dragSource == null)
+            {
+                this.BottomHoverText.Text = control.Text;
+            }
+        }
+
+        private void lvItems_ItemTextBlock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            TextBlock control = (TextBlock)sender;
+            if (control != null && dragSource == null)
+            {
+                this.BottomHoverText.Text = "";
+            }
+        }
     }
 }

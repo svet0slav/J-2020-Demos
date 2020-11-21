@@ -64,7 +64,9 @@
                                 <ItemContainerTemplate>
                                     <TextBlock Text="{Binding ItemName}" Background="Black" Foreground="DarkGray" TextAlignment="Left" 
                                                 Margin="0,0,0,0" Width="140" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                               DragDrop.DragEnter="lvItems_ItemTextBlock_DragEnter"/>
+                                               DragDrop.DragEnter="lvItems_ItemTextBlock_DragEnter"
+                                               MouseEnter="lvItems_ItemTextBlock_MouseEnter"
+                                               MouseLeave="lvItems_ItemTextBlock_MouseLeave" />
                                 </ItemContainerTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -150,9 +152,7 @@
                                 <ItemContainerTemplate>
                                     <StackPanel Orientation="Horizontal" Background="Gray" Width="300px">
                                         <TextBlock Text="{Binding DroppedItems}" Background="Gray" Foreground="DarkGray"
-                                                        Height="60"
-                                                   DragDrop.Drop="lvButtons_TextBlock_Drop"
-                                                DragDrop.DragOver="lvButtons_TextBlock_DragOver"/>
+                                                        Height="60" />
                                     </StackPanel>
                                 </ItemContainerTemplate>
                             </GridViewColumn.CellTemplate>
