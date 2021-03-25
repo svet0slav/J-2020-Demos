@@ -4,7 +4,7 @@ using TaxCalculator.C21.Common.Data;
 
 namespace TaxCalculator.C21.Services
 {
-    public class TaxCalculatorService
+    public class TaxCalculatorService : ITaxCalculatorService
     {
         public void CalculateTax(Salary salary, TaxDefinition taxDefinition)
         {
