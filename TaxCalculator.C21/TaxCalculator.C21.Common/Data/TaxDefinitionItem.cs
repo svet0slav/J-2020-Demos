@@ -2,6 +2,8 @@
 {
     public class TaxDefinitionItem
     {
+        public static decimal MaxUpToAmount = decimal.MaxValue;
+
         public int Id { get; set; }
 
         public string Name { get; set; }
