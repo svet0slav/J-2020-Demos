@@ -30,7 +30,7 @@ namespace TaxCalculator.C21.Tests
                     {
                         Name = "Tax 10%",
                         FromAmountIncluding = 1000m,
-                        UpToAmount = decimal.MaxValue,
+                        UpToAmount = TaxDefinitionItem.MaxUpToAmount,
                         BaseTaxAmount = 0m,
                         PercentAboveFrom = 0.10m
                     },
@@ -41,6 +41,15 @@ namespace TaxCalculator.C21.Tests
                         UpToAmount = 3000m,
                         BaseTaxAmount = 0m,
                         PercentAboveFrom = 0.15m
+                    },
+                    // This definition adds social contribution for income above 3000 or the amount 1000-3000.
+                    new TaxDefinitionItem()
+                    {
+                        Name = "Social contribution for above 3000",
+                        FromAmountIncluding = 3000m,
+                        UpToAmount = TaxDefinitionItem.MaxUpToAmount,
+                        BaseTaxAmount = 300m,
+                        PercentAboveFrom = 0m
                     }
                 }
             };
