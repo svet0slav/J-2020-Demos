@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaxCalculator.C21.Common.Data;
+using TaxCalculator.C21.Services;
 
-namespace TaxCalculator.C21.Services
+namespace TaxCalculator.C21.Tests
 {
     public class TaxCalculatorDefinitionPoCService : ITaxCalculatorDefinitionService
     {

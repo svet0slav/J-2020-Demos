@@ -6,12 +6,20 @@ namespace TaxCalculator.C21.Services
 {
     public class TaxCalculatorService : ITaxCalculatorService
     {
-        public void CalculateTax(Salary salary, TaxDefinition taxDefinition)
-        {
-            if (salary == null || taxDefinition == null)
-                throw new ArgumentException("Salary and tax definition unknwon");
+        private ITaxCalculatorDefinitionService _definitionService;
 
-            var gross = salary.GrossAmount;
+        public TaxCalculatorService(ITaxCalculatorDefinitionService definitionService)
+        {
+            _definitionService = definitionService;
+        }
+
+        public void CalculateTax(Salary salary)
+        {
+            if (salary == null)
+                throw new ArgumentException("Salary definition unknwon");
+
+            var taxDefinition = GetDefinition(salary.PeriodFrom);
+            salary.TaxDefinition = taxDefinition;
             salary.TaxAmount = 0;
             if (salary.TaxExplanation != null)
                 salary.TaxExplanation = null;
@@ -28,6 +36,14 @@ namespace TaxCalculator.C21.Services
                 }
             }
             salary.NetAmount = salary.GrossAmount - salary.TaxAmount;
+        }
+
+        protected TaxDefinition GetDefinition(DateTime moment)
+        {
+            var result = _definitionService.GetTaxDefinition(moment);
+            if (result == null)
+                throw new Exception("No tax definition");
+            return result;
         }
 
         /// <summary>

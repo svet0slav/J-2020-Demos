@@ -15,6 +15,7 @@ namespace TaxCalculator.C21.Common.Data
 
         public decimal GrossAmount { get; set; }
         public decimal TaxAmount { get; set; }
+        public TaxDefinition TaxDefinition { get; set; }
         public IDictionary<TaxDefinitionItem, decimal> TaxExplanation { get; set; }
         public decimal NetAmount { get; set; }
     }

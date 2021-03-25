@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using Moq;
 using TaxCalculator.C21.Common.Data;
 using TaxCalculator.C21.Services;
 
@@ -12,15 +13,13 @@ namespace TaxCalculator.C21.Tests
         [TestMethod]
         public void Service_CaseGeorge_Calculate()
         {
-            var employee = new Employee();
+            var employee = CreateEmployee();
             var salary = CreateSalary(employee, DateTime.Now, 980m);
-            var defService = CreateDefinitionService();
             var service = CreateService();
 
-            var definition = CreateDefinition(defService);
-            service.CalculateTax(salary, definition);
+            service.CalculateTax(salary);
 
-            Assert.AreEqual(1000m, definition.Definitions.First().UpToAmount);
+            Assert.AreEqual(1000m, salary.TaxDefinition.Definitions.First().UpToAmount);
             Assert.IsNotNull(salary.TaxExplanation);
             Assert.AreEqual(1, salary.TaxExplanation.Count);
             Assert.AreEqual(1000m, salary.TaxExplanation.First().Key.UpToAmount);
@@ -34,13 +33,11 @@ namespace TaxCalculator.C21.Tests
         {
             var employee = new Employee();
             var salary = CreateSalary(employee, DateTime.Now, 3400m);
-            var defService = CreateDefinitionService();
             var service = CreateService();
 
-            var definition = CreateDefinition(defService);
-            service.CalculateTax(salary, definition);
+            service.CalculateTax(salary);
 
-            Assert.AreEqual(1000m, definition.Definitions.First().UpToAmount);
+            Assert.AreEqual(1000m, salary.TaxDefinition.Definitions.First().UpToAmount);
             Assert.IsNotNull(salary.TaxExplanation);
             Assert.AreEqual(2, salary.TaxExplanation.Count);
             Assert.AreEqual(1000m, salary.TaxExplanation.First().Key.FromAmountIncluding);
@@ -51,13 +48,9 @@ namespace TaxCalculator.C21.Tests
             Assert.AreEqual(salary.GrossAmount - 540m, salary.NetAmount);
         }
 
-        private ITaxCalculatorService CreateService()
+        private Employee CreateEmployee()
         {
-            return new TaxCalculatorService();
-        }
-        private ITaxCalculatorDefinitionService CreateDefinitionService()
-        {
-            return new TaxCalculatorDefinitionPoCService();
+            return new Mock<Employee>().Object; // new Employee();
         }
 
         private Salary CreateSalary(Employee employee, DateTime moment, decimal grossAmount)
@@ -72,9 +65,15 @@ namespace TaxCalculator.C21.Tests
             };
         }
 
-        private TaxDefinition CreateDefinition(ITaxCalculatorDefinitionService definitionService)
+        private ITaxCalculatorDefinitionService CreateDefinitionService()
         {
-            return definitionService.GetTaxDefinition(DateTime.Now);
+            return new TaxCalculatorDefinitionPoCService();
+        }
+
+        private ITaxCalculatorService CreateService()
+        {
+            var definitionService = CreateDefinitionService();
+            return new TaxCalculatorService(definitionService);
         }
     }
 }

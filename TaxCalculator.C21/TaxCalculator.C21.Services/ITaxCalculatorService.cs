@@ -4,6 +4,10 @@ namespace TaxCalculator.C21.Services
 {
     public interface ITaxCalculatorService
     {
-        void CalculateTax(Salary salary, TaxDefinition taxDefinition);
+        /// <summary>
+        /// Calculate tax and net amount for a salary.
+        /// </summary>
+        /// <param name="salary">The definition of the salary.</param>
+        void CalculateTax(Salary salary);
     }
 }
