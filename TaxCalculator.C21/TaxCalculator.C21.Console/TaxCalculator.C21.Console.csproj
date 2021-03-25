@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaxCalculator.C21.Common\TaxCalculator.C21.Common.csproj" />
+    <ProjectReference Include="..\TaxCalculator.C21.Services\TaxCalculator.C21.Services.csproj" />
+  </ItemGroup>
+
+</Project>
